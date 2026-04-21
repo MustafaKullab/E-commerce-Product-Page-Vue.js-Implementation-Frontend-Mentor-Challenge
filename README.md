@@ -6,7 +6,7 @@ This project is a solution to the **Frontend Mentor E-commerce Product Page Chal
 
 ## 🚀 Live Demo
 
-🔗 https://mustafakullab.github.io/frontendmentor-product-page-vue/
+🔗 https://e-commerce-project-new-jet.vercel.app/#/
 
 ---
 
