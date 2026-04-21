@@ -173,7 +173,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, ref } from "vue";
 import { useToast } from "vue-toastification";
 
 const props = defineProps({
