@@ -26,7 +26,7 @@
           <div class="sliderImages row mt-5">
             <div class="thumbImage col-3" v-for="(image, i) in images" :key="i">
               <img
-                :src="image.thumb"
+                :src="resolveImagePath(image.thumb)"
                 class="img-fluid rounded-3 cursor-pointer"
                 :alt="image.title"
                 @click="selectedIndex(i)"
@@ -87,42 +87,37 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, ref } from "vue";
 const images = ref([
   {
-    big: "/images/image-product-1.jpg",
-    thumb: "/images/image-product-1-thumbnail.jpg",
+    big: "images/image-product-1.jpg",
+    thumb: "images/image-product-1-thumbnail.jpg",
     price: 250,
     title: "Comfortable sneakers for everyday workouts.",
-    description:
-      "These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they'll withstand everything the weather can offer.",
+    description: "These low-profile sneakers are your perfect casual wear companion.",
   },
   {
-    big: "/images/image-product-2.jpg",
-    thumb: "/images/image-product-2-thumbnail.jpg",
+    big: "images/image-product-2.jpg",
+    thumb: "images/image-product-2-thumbnail.jpg",
     price: 650,
     title: "Elegant formal shoes for work and events.",
-    description:
-      "Step into comfort with these stylish running shoes. Lightweight and breathable, they keep you moving all day.",
+    description: "Step into comfort with these stylish running shoes.",
   },
   {
-    big: "/images/image-product-3.jpg",
-    thumb: "/images/image-product-3-thumbnail.jpg",
+    big: "images/image-product-3.jpg",
+    thumb: "images/image-product-3-thumbnail.jpg",
     price: 300,
     title: "Light casual shoes for walks and outings.",
-    description:
-      "Classic leather loafers that combine elegance and durability. Perfect for work or casual outings.",
+    description: "Classic leather loafers that combine elegance and durability.",
   },
   {
-    big: "/images/image-product-4.jpg",
-    thumb: "/images/image-product-4-thumbnail.jpg",
+    big: "images/image-product-4.jpg",
+    thumb: "images/image-product-4-thumbnail.jpg",
     price: 400,
     title: "Warm winter boots to beat the cold and rain.",
-    description:
-      "Classic leather loafers that combine elegance and durability. Perfect for work or casual outings.",
+    description: "Classic leather loafers that combine elegance and durability.",
   },
 ]);
-
 const indexSelected = ref(0);
 const quantity = ref(1);
 const openImage = ref(false);
@@ -185,8 +180,15 @@ const removePopup = (e) => {
 
 // Computed ***
 // computed to change Image
+// دالة لتجهيز المسار بشكل صحيح
+const resolveImagePath = (path) => {
+  const base = import.meta.env.BASE_URL;
+  return `${base}${path}`.replace(/\/+/g, "/");
+};
+
+// تعديل الـ computed الخاص بالصورة الكبيرة
 const changeImg = computed(() => {
-  return images.value[indexSelected.value].big;
+  return resolveImagePath(images.value[indexSelected.value].big);
 });
 
 // Computed Title Of Image
